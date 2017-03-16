@@ -14,5 +14,6 @@ public interface Interface {
       
     public void delay(int parametro);
     public void voltarMenuPrincipal();
+    public int lerOpcao();
     
 }

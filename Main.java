@@ -21,35 +21,32 @@ public class Main  {
         Scanner ler = new Scanner(System.in);
          
         agenda.menuPrincipal();
-        System.out.println("\nInsira a opcao desejada:");
-        aux = ler.nextLine();
-        opcaoMenuPrincipal = Integer.parseInt(aux);
         
+        System.out.println("\nInsira a opcao desejada:");
+        opcaoMenuPrincipal = agenda.lerOpcao();
+
         while(opcaoMenuPrincipal > 4 || opcaoMenuPrincipal < 1){
-            
+
                 System.out.println("Opcao errada. Tente novamente");
                 System.out.println("\nInsira a opcao desejada:");
-                aux = ler.nextLine();
-                opcaoMenuPrincipal = Integer.parseInt(aux);
-            
+                opcaoMenuPrincipal = agenda.lerOpcao();
+
         }
-        
+
         opcaoMenu = opcaoMenuPrincipal;
-        
+
         while(opcaoMenu > 0 && opcaoMenu < 6){
-            
+
             if(flagVoltar == true){
                 System.out.println("\nInsira a opcao desejada:");
-                aux = ler.nextLine();
-                opcaoMenuPrincipal = Integer.parseInt(aux);
+                opcaoMenuPrincipal = agenda.lerOpcao();
             }
-            
+
             switch(opcaoMenuPrincipal){
                 case 1:
                     agenda.menuPaciente();
                     System.out.println("\nInsira a opcao desejada:");
-                    aux = ler.nextLine();
-                    opcaoMenu = Integer.parseInt(aux);
+                    opcaoMenu = agenda.lerOpcao();
 
 
                         switch(opcaoMenu){                
@@ -80,9 +77,10 @@ public class Main  {
                                 flagVoltar = true;
                                 break;
                             case 3:
+
                                 System.out.println("Insira o nome do paciente:");
                                 nome = ler.nextLine();
-                                agenda.listarPaciente(nome);
+                                agenda.listarPacientePorNome(nome);
                                 agenda.voltarMenuPrincipal();
                                 flagVoltar = true;
                                 break;
@@ -100,8 +98,7 @@ public class Main  {
                 case 2:
                     agenda.menuMedico();
                     System.out.println("\nInsira a opcao desejada:");
-                    aux = ler.nextLine();
-                    opcaoMenu = Integer.parseInt(aux);
+                    opcaoMenu = agenda.lerOpcao();
 
                     switch(opcaoMenu){                
                         case 1:
@@ -135,7 +132,7 @@ public class Main  {
                         case 3:
                             System.out.println("Insira o nome do medico:");
                             nome = ler.nextLine();
-                            agenda.listarMedico(nome);
+                            agenda.listarMedicoPorNome(nome);
 
                             agenda.voltarMenuPrincipal();
                             flagVoltar = true;
@@ -152,16 +149,62 @@ public class Main  {
                     }
                     break;
                 case 3:
-                   // menuConsulta();
+                    agenda.menuConsulta();
+                    System.out.println("\nInsira a opcao desejada:");
+                    opcaoMenu = agenda.lerOpcao();
+
+                    switch(opcaoMenu){                
+                        case 1:
+                            System.out.println("Insira o nome do paciente cadastrado:");
+                            nome = ler.nextLine();
+                            agenda.listarPacientePorNome(nome);
+                            System.out.println("Deseja marcar a consulta para qual médico(insira seu nome)?:");
+                            nome = ler.nextLine();
+                            agenda.listarMedicoPorNome(nome);
+                            
+                            // To be continue ...
+                            agenda.voltarMenuPrincipal();
+                            flagVoltar = true;
+
+                            break;
+                        case 2:
+
+
+                            agenda.voltarMenuPrincipal();
+                            flagVoltar = true;    
+
+                            break;
+                        case 3:
+
+
+
+                            agenda.voltarMenuPrincipal();
+                            flagVoltar = true;
+
+                            break;
+                        case 4:
+
+                            agenda.voltarMenuPrincipal();
+                            flagVoltar = true;
+
+
+                            break;
+                        case 5:
+                            agenda.menuPrincipal();
+                            flagVoltar = true;
+
+                            break;
+                    }
+
                     break;
                 case 4:
                     System.out.println("Bye!");
                     agenda.delay(2);
                     System.exit(0);
                     break;
-           
-            }
-        
+
+            }    
         }
+
     }
 }
