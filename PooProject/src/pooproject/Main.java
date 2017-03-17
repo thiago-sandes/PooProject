@@ -5,13 +5,14 @@
  */
 package pooproject;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * #TODO
+ * Line 174. Fazer outra função para tratar a leitura dos horários de consulta. 
+ * 
  * @author thiago_sandes
- */
+ */ 
 public class Main  {
     public static void main(String args[]){
         int opcaoMenu, opcaoMenuPrincipal;
@@ -152,41 +153,73 @@ public class Main  {
                     agenda.menuConsulta();
                     System.out.println("\nInsira a opcao desejada:");
                     opcaoMenu = agenda.lerOpcao();
-
+                    int horario; // Os horários de atendimentos são das 08h - 12h (1h cada consulta) e das 14h - 18h.
+                    String nomePaciente, nomeMedico;
+                    boolean auxFlag;
+                    
                     switch(opcaoMenu){                
-                        case 1:
+                        case 1: // Criar hashMap de Consultas...
+                            Consulta consulta = new Consulta();
                             System.out.println("Insira o nome do paciente cadastrado:");
-                            nome = ler.nextLine();
-                            agenda.listarPacientePorNome(nome);
-                            System.out.println("Deseja marcar a consulta para qual médico(insira seu nome)?:");
-                            nome = ler.nextLine();
-                            agenda.listarMedicoPorNome(nome);
+                            nomePaciente = ler.nextLine();
+                            auxFlag = agenda.listarPacientePorNome(nomePaciente);
+                            if(auxFlag == true){    
+                                consulta.setNomePaciente(nomePaciente);
+                                System.out.println("Deseja marcar a consulta para qual médico(insira seu nome)?:");
+                                nomeMedico = ler.nextLine();
+                                auxFlag = agenda.listarMedicoPorNome(nomeMedico);
+                                if(auxFlag == true){
+                                    consulta.setNomeMedico(nomeMedico);
+                                    System.out.println("Os horários de atendimentos são das 08h - 12h (1h cada consulta) e das 14h - 18h. Em qual horario deseja marcar a consulta?:");
+                                    horario = agenda.lerOpcao();
+                                    while((horario > 11 && horario < 14) || (horario > 17 || horario < 8)){
+                                        System.out.println("Horário inválido. Tente novamente com um horario disponivel: ");
+                                        horario = agenda.lerOpcao();
+                                    }
+                                    consulta.setHorario(horario);
+                                    
+                                    System.out.println("\nMarcando a consulta . . . \n");
+                                    agenda.addConsulta(nomePaciente, consulta);
+                                    agenda.delay(3);
+                                    
+                                    System.out.println("\nConsulta registrada com sucesso!\n");
+                                    
+                                }else{
+                                    System.out.println("Busque o nome correto do medico no menu Medico e volte aqui.");
+                                
+                                }
+                            }else{
+                                System.out.println("Busque o nome correto do paciente no menu Paciente e volte aqui.");
+                                
+                            }
                             
-                            // To be continue ...
                             agenda.voltarMenuPrincipal();
                             flagVoltar = true;
 
                             break;
                         case 2:
-
+                            System.out.println("Para remover uma consulta, insira o nome do paciente: ");
+                            nome = ler.nextLine();
+                            agenda.removerConsultaPorPaciente(nome);
 
                             agenda.voltarMenuPrincipal();
                             flagVoltar = true;    
 
                             break;
                         case 3:
-
-
-
+                            System.out.println("Insira o nome do paciente para listar suas consultas:");
+                            nome = ler.nextLine();
+                            agenda.listarConsultaPorPaciente(nome);
+                                
                             agenda.voltarMenuPrincipal();
                             flagVoltar = true;
 
                             break;
                         case 4:
-
+                            agenda.listarTodasConsultas();
+                                
                             agenda.voltarMenuPrincipal();
                             flagVoltar = true;
-
 
                             break;
                         case 5:
