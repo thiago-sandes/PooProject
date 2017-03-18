@@ -240,7 +240,7 @@ public class Agenda implements Interface{
             System.out.println("O que deseja fazer?");
             System.out.println("1 - Marcar consulta");
             System.out.println("2 - Desmarcar consulta");
-            System.out.println("3 - Listar consultas marcadas para um dado paciente");
+            System.out.println("3 - Listar consulta marcada para um dado paciente");
             System.out.println("4 - Listar todas as consultas marcadas por paciente");
             System.out.println("5 - Voltar ao menu anterior\n");
             
