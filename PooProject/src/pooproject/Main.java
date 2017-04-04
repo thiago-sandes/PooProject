@@ -21,7 +21,10 @@ public class Main {
         boolean flagVoltar = false;
         Agenda agenda = new Agenda();
         Scanner ler = new Scanner(System.in);
-
+        
+        //Interface Gráfica;
+        Frame frame = new Frame();
+        
         agenda.menuPrincipal();
 
         System.out.println("\nInsira a opcao desejada:");
