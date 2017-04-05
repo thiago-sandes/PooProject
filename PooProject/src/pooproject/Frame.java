@@ -31,29 +31,80 @@ public class Frame implements ActionListener {
     private JFrame quadro;
     
     public Frame(){
-        makeFrame();
+        makeMainFrame();
     }
     
-    private void makeFrame(){
+    
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+   
+
+    class AbrirActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            abrirArquivo(); // executa a ação de abrir }
+        }    
+    }
+    
+    class SalvarActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            salvarArquivo(); 
+        }
+    }
+
+    class SairActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            sair(); 
+        }
+    }
+    
+    class PacienteFrameActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            makePacienteFrame(); 
+        }
+    }
+    
+    
+    class MedicoActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            makeMedicoFrame(); 
+        }
+    }
+    
+    
+    class ConsultaActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            makeConsultaFrame(); 
+        }
+    }
+    
+    private void makeMainFrame(){
         quadro = new JFrame("Sistema de clínicas"); // Crio quadro
         Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
         
         conteudo.setLayout(new BorderLayout());
         
-        JLabel rotulo = new JLabel("                                                                                                                                MENUS"); // Crio rótulo    
-        conteudo.add(rotulo, BorderLayout.NORTH); // Adiciono rótulo ao quadro
+        JButton button = new JButton("Sobre o aplicativo");    
+        conteudo.add(button, BorderLayout.NORTH); // Adiciono rótulo ao quadro
         
         JButton button1 = new JButton("Paciente");
         conteudo.add(button1, BorderLayout.CENTER);
+        button1.addActionListener(new PacienteFrameActionListener());
         
         JButton button2 = new JButton("Médico");
         conteudo.add(button2, BorderLayout.WEST);
-       
+        button2.addActionListener(new MedicoActionListener());
+        
         JButton button3 = new JButton("Consulta");
         conteudo.add(button3, BorderLayout.EAST);
+        button3.addActionListener(new ConsultaActionListener());
         
         JButton button4 = new JButton("Sair");
         conteudo.add(button4, BorderLayout.SOUTH);
+        button4.addActionListener(new SairActionListener());
         
         quadro.pack(); // Organizo os componentes de rótulo e de container dentro do quadro
         
@@ -90,37 +141,91 @@ public class Frame implements ActionListener {
         
         
     }
-
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    private void makePacienteFrame(){
+        quadro = new JFrame("Sistema de clínicas"); // Crio quadro
+        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
+        
+        conteudo.setLayout(new BorderLayout());
+        
+        JButton button = new JButton("Ajuda");    
+        conteudo.add(button, BorderLayout.NORTH); // Adiciono rótulo ao quadro
+        
+        JButton button1 = new JButton("Adicionar Paciente");
+        conteudo.add(button1, BorderLayout.CENTER);
+        
+        JButton button2 = new JButton("Remover Paciente");
+        conteudo.add(button2, BorderLayout.WEST);
+       
+        JButton button3 = new JButton("Listar paciente cadastrado");
+        conteudo.add(button3, BorderLayout.EAST);
+        
+        JButton button4 = new JButton("Listar todos os pacientes cadastrados");
+        conteudo.add(button4, BorderLayout.SOUTH);
+        
+        quadro.pack(); // Organizo os componentes de rótulo e de container dentro do quadro
+        
+        quadro.setVisible(true); // Torno o quadro visível
+        
+        
     }
     
-   
-
-    class AbrirActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent event){
-            abrirArquivo(); // executa a ação de abrir }
-        }    
+    private void makeMedicoFrame(){
+        quadro = new JFrame("Sistema de clínicas"); // Crio quadro
+        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
+        
+        conteudo.setLayout(new BorderLayout());
+        
+        JButton button = new JButton("Ajuda");    
+        conteudo.add(button, BorderLayout.NORTH); // Adiciono rótulo ao quadro
+        
+        JButton button1 = new JButton("Adicionar médico");
+        conteudo.add(button1, BorderLayout.CENTER);
+        
+        JButton button2 = new JButton("Remover médico");
+        conteudo.add(button2, BorderLayout.WEST);
+       
+        JButton button3 = new JButton("Listar médico cadastrado");
+        conteudo.add(button3, BorderLayout.EAST);
+        
+        JButton button4 = new JButton("Listar todos os médicos cadastrados");
+        conteudo.add(button4, BorderLayout.SOUTH);
+        
+        quadro.pack(); // Organizo os componentes de rótulo e de container dentro do quadro
+        
+        quadro.setVisible(true); // Torno o quadro visível
+        
+        
     }
     
-    class MenuPacienteActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent event){
-            abrirArquivo(); // executa a ação de abrir }
-        }    
+    private void makeConsultaFrame(){
+        quadro = new JFrame("Ajuda"); // Crio quadro
+        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
+        
+        conteudo.setLayout(new BorderLayout());
+        
+        JButton button = new JButton("Ajuda");    
+        conteudo.add(button, BorderLayout.NORTH); // Adiciono rótulo ao quadro
+        
+        JButton button1 = new JButton("Marcar consulta");
+        conteudo.add(button1, BorderLayout.CENTER);
+        
+        JButton button2 = new JButton("Desmarcar consulta");
+        conteudo.add(button2, BorderLayout.WEST);
+       
+        JButton button3 = new JButton("Listar consulta marcada");
+        conteudo.add(button3, BorderLayout.EAST);
+        
+        JButton button4 = new JButton("Listar todas as consultas marcadas");
+        conteudo.add(button4, BorderLayout.SOUTH);
+        
+        quadro.pack(); // Organizo os componentes de rótulo e de container dentro do quadro
+        
+        quadro.setVisible(true); // Torno o quadro visível
+        
+        
     }
     
-    class SalvarActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent event){
-            salvarArquivo(); 
-        }
-    }
-
-    class SairActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent event){
-            sair(); 
-        }
-    }
     
     private void abrirArquivo(){
         //System.out.println("Vou abrir um arquivo");
