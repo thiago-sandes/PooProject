@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -81,14 +82,115 @@ public class Frame implements ActionListener {
         }
     }
     
+    class ShowAboutActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            showAbout(); 
+        }
+    }
+    
+    class HelpPacienteActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            helpPaciente(); 
+        }
+    }
+    
+    class AddPacienteActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            addPaciente(); 
+        }
+    }
+    
+    class RmvPacienteActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            rmvPaciente(); 
+        }
+    }
+    
+    class LstPacienteActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            lstPaciente(); 
+        }
+    }
+      
+    class LstAllPacientesActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            lstAllPacientes(); 
+        }
+    }
+    
+    class HelpMedicoActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            helpMedico(); 
+        }
+    }
+    
+    class AddMedicoActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            addMedico(); 
+        }
+    }
+    
+    class RmvMedicoActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            rmvMedico(); 
+        }
+    }
+    
+    class LstMedicoActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            lstMedico(); 
+        }
+    }
+      
+    class LstAllMedicosActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            lstAllMedicos(); 
+        }
+    }
+    
+    
+    class HelpConsultaActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            helpConsulta(); 
+        }
+    }
+    
+    class AddConsultaActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            addConsulta(); 
+        }
+    }
+    
+    class RmvConsultaActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            rmvConsulta(); 
+        }
+    }
+    
+    class LstConsultaActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            lstConsulta(); 
+        }
+    }
+      
+    class LstAllConsultasActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            lstAllConsultas(); 
+        }
+    }
+    
     private void makeMainFrame(){
         quadro = new JFrame("Sistema de clínicas"); // Crio quadro
-        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
+        quadro.setSize(400, 400);
+        quadro.setLocation(200,50);
+        quadro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
         conteudo.setLayout(new BorderLayout());
         
         JButton button = new JButton("Sobre o aplicativo");    
         conteudo.add(button, BorderLayout.NORTH); // Adiciono rótulo ao quadro
+        button.addActionListener(new ShowAboutActionListener());
         
         JButton button1 = new JButton("Paciente");
         conteudo.add(button1, BorderLayout.CENTER);
@@ -105,11 +207,8 @@ public class Frame implements ActionListener {
         JButton button4 = new JButton("Sair");
         conteudo.add(button4, BorderLayout.SOUTH);
         button4.addActionListener(new SairActionListener());
-        
-        quadro.pack(); // Organizo os componentes de rótulo e de container dentro do quadro
-        
-        quadro.setVisible(true); // Torno o quadro visível
-        
+  
+      
         JMenuBar barraDeMenu = new JMenuBar(); // Crio barra de menu
         
         quadro.setJMenuBar(barraDeMenu); // Coloco a barra de menu no quadro
@@ -136,94 +235,106 @@ public class Frame implements ActionListener {
         
         menuDeArquivo.add(itemSair); // Adiciono um item de menu ao menu
         
-        
-        
-        
+        quadro.setVisible(true); // Torno o quadro visível
         
     }
     
     private void makePacienteFrame(){
         quadro = new JFrame("Sistema de clínicas"); // Crio quadro
-        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
+        quadro.setSize(500, 400);
+        quadro.setLocation(100,50);
+        quadro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
+        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
         conteudo.setLayout(new BorderLayout());
         
         JButton button = new JButton("Ajuda");    
         conteudo.add(button, BorderLayout.NORTH); // Adiciono rótulo ao quadro
+        button.addActionListener(new HelpPacienteActionListener());
+        
         
         JButton button1 = new JButton("Adicionar Paciente");
         conteudo.add(button1, BorderLayout.CENTER);
+        button1.addActionListener(new AddPacienteActionListener());
         
         JButton button2 = new JButton("Remover Paciente");
         conteudo.add(button2, BorderLayout.WEST);
-       
+        button2.addActionListener(new RmvPacienteActionListener());
+        
         JButton button3 = new JButton("Listar paciente cadastrado");
         conteudo.add(button3, BorderLayout.EAST);
+        button3.addActionListener(new LstPacienteActionListener());
         
         JButton button4 = new JButton("Listar todos os pacientes cadastrados");
         conteudo.add(button4, BorderLayout.SOUTH);
-        
-        quadro.pack(); // Organizo os componentes de rótulo e de container dentro do quadro
+        button4.addActionListener(new LstAllPacientesActionListener());
         
         quadro.setVisible(true); // Torno o quadro visível
-        
         
     }
     
     private void makeMedicoFrame(){
         quadro = new JFrame("Sistema de clínicas"); // Crio quadro
-        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
+        quadro.setSize(500, 400);
+        quadro.setLocation(100,50);
+        quadro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
+        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
         conteudo.setLayout(new BorderLayout());
         
         JButton button = new JButton("Ajuda");    
         conteudo.add(button, BorderLayout.NORTH); // Adiciono rótulo ao quadro
+        button.addActionListener(new HelpMedicoActionListener());
         
         JButton button1 = new JButton("Adicionar médico");
         conteudo.add(button1, BorderLayout.CENTER);
+        button1.addActionListener(new AddMedicoActionListener());
         
         JButton button2 = new JButton("Remover médico");
         conteudo.add(button2, BorderLayout.WEST);
-       
+        button2.addActionListener(new RmvMedicoActionListener());
+        
         JButton button3 = new JButton("Listar médico cadastrado");
         conteudo.add(button3, BorderLayout.EAST);
+        button3.addActionListener(new LstMedicoActionListener());
         
         JButton button4 = new JButton("Listar todos os médicos cadastrados");
         conteudo.add(button4, BorderLayout.SOUTH);
-        
-        quadro.pack(); // Organizo os componentes de rótulo e de container dentro do quadro
+        button4.addActionListener(new LstAllMedicosActionListener());
         
         quadro.setVisible(true); // Torno o quadro visível
-        
-        
     }
     
     private void makeConsultaFrame(){
         quadro = new JFrame("Ajuda"); // Crio quadro
-        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
+        quadro.setSize(500, 400);
+        quadro.setLocation(100,50);
+        quadro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
+        Container conteudo = quadro.getContentPane(); // Crio painel de conteúdo do quadro
         conteudo.setLayout(new BorderLayout());
         
         JButton button = new JButton("Ajuda");    
         conteudo.add(button, BorderLayout.NORTH); // Adiciono rótulo ao quadro
+        button.addActionListener(new HelpConsultaActionListener());
         
         JButton button1 = new JButton("Marcar consulta");
         conteudo.add(button1, BorderLayout.CENTER);
+        button1.addActionListener(new AddConsultaActionListener());
         
         JButton button2 = new JButton("Desmarcar consulta");
         conteudo.add(button2, BorderLayout.WEST);
-       
+        button2.addActionListener(new RmvConsultaActionListener());
+        
         JButton button3 = new JButton("Listar consulta marcada");
         conteudo.add(button3, BorderLayout.EAST);
+        button3.addActionListener(new LstConsultaActionListener());
         
         JButton button4 = new JButton("Listar todas as consultas marcadas");
         conteudo.add(button4, BorderLayout.SOUTH);
-        
-        quadro.pack(); // Organizo os componentes de rótulo e de container dentro do quadro
+        button4.addActionListener(new LstAllConsultasActionListener());
         
         quadro.setVisible(true); // Torno o quadro visível
-        
-        
     }
     
     
@@ -257,6 +368,99 @@ public class Frame implements ActionListener {
             System.out.println("Você cancelou a escolha");
         else
             System.out.println("Você escolheu " + filename);
+    }
+    
+    private void showAbout(){
+        JOptionPane.showMessageDialog(quadro, "Sobre o aplicativo", "Sistema para clínicas", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void helpPaciente(){
+        JOptionPane.showMessageDialog(quadro,  "A implementar...","Ajuda para o menu Paciente", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void addPaciente(){
+        String nome = JOptionPane.showInputDialog("Insira o nome do paciente.");
+        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
+        String telefone = JOptionPane.showInputDialog("Insira o telefone do paciente.");
+        
+        JOptionPane.showMessageDialog(quadro, " Paciente adicionado com sucesso!" ,"Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void rmvPaciente(){
+        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente para removê-lo");
+        
+        JOptionPane.showMessageDialog(quadro, " Paciente removido com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void lstPaciente(){
+        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
+        
+        JOptionPane.showMessageDialog(quadro," Dados do paciente: " , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void lstAllPacientes(){
+        // Será melhor criar um JFrame. Ou é hora de usar um JPanel?
+        JOptionPane.showMessageDialog(quadro, " A implementar..." , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void helpMedico(){
+        JOptionPane.showMessageDialog(quadro, "A implementar...", "Ajuda para o menu Médico",  JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void addMedico(){
+        String nome = JOptionPane.showInputDialog("Insira o nome do médico.");
+        String especialidade = JOptionPane.showInputDialog("Insira a especialidade do médico.");
+        
+        JOptionPane.showMessageDialog(quadro, " Médico adicionado com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void rmvMedico(){
+        String nome = JOptionPane.showInputDialog("Insira o nome do médico para removê-lo.");
+        String especialidade = JOptionPane.showInputDialog("Insira a especialidade do médico para removê-lo");
+        
+        JOptionPane.showMessageDialog(quadro, " Médico removido com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void lstMedico(){
+        String cpf = JOptionPane.showInputDialog("Insira o nome do médico.");
+        
+        JOptionPane.showMessageDialog(quadro, " Dados do médico: " , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void lstAllMedicos(){
+        // Será melhor criar um JFrame. Ou é hora de usar um JPanel?
+        JOptionPane.showMessageDialog(quadro, " A implementar..." , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    
+    private void helpConsulta(){
+        JOptionPane.showMessageDialog(quadro, "A implementar...", "Ajuda para o menu Consulta",  JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void addConsulta(){
+        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
+        
+        String nome = JOptionPane.showInputDialog("Insira o nome do médico.");
+        String especialidade = JOptionPane.showInputDialog("Insira a especialidade do médico.");
+        
+        JOptionPane.showMessageDialog(quadro, " Consulta marcada com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void rmvConsulta(){
+        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
+        
+        JOptionPane.showMessageDialog(quadro, " Consulta desmarcada com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void lstConsulta(){
+        String cpf = JOptionPane.showInputDialog("Insira o nome do paciente.");
+        
+        JOptionPane.showMessageDialog(quadro, " Dados da consulta: " , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void lstAllConsultas(){
+        // Será melhor criar um JFrame. Ou é hora de usar um JPanel?
+        JOptionPane.showMessageDialog(quadro, " A implementar..." , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void sair(){
