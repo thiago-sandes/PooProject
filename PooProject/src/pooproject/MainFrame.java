@@ -28,10 +28,11 @@ import javax.swing.JOptionPane;
  *
  * @author thiago_sandes
  */
-public class Frame implements ActionListener {
+public class MainFrame implements ActionListener {
     private JFrame quadro;
+    Agenda agenda = new Agenda();
     
-    public Frame(){
+    public MainFrame(){
         makeMainFrame();
     }
     
@@ -379,28 +380,34 @@ public class Frame implements ActionListener {
     }
     
     private void addPaciente(){
-        String nome = JOptionPane.showInputDialog("Insira o nome do paciente.");
-        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
-        String telefone = JOptionPane.showInputDialog("Insira o telefone do paciente.");
+        Paciente paciente = new Paciente();
         
+        String nome = JOptionPane.showInputDialog("Insira o nome do paciente.");
+        paciente.setNome(nome);
+        
+        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
+        paciente.setCpf(cpf);
+        
+        String telefone = JOptionPane.showInputDialog("Insira o telefone do paciente.");
+        paciente.setTelefone(telefone);
+        
+        agenda.addPaciente(cpf, paciente);
+                            
         JOptionPane.showMessageDialog(quadro, " Paciente adicionado com sucesso!" ,"Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void rmvPaciente(){
         String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente para removê-lo");
-        
-        JOptionPane.showMessageDialog(quadro, " Paciente removido com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+        agenda.removerPacientePorCpf(cpf);
     }
     
     private void lstPaciente(){
         String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
-        
-        JOptionPane.showMessageDialog(quadro," Dados do paciente: " , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
-    }
+        agenda.listarPacientePorCpf(cpf);
+    }   
     
     private void lstAllPacientes(){
-        // Será melhor criar um JFrame. Ou é hora de usar um JPanel?
-        JOptionPane.showMessageDialog(quadro, " A implementar..." , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+        agenda.listarTodosPacientes();
     }
     
     private void helpMedico(){
@@ -408,8 +415,13 @@ public class Frame implements ActionListener {
     }
     
     private void addMedico(){
+        Medico medico = new Medico();
+        
         String nome = JOptionPane.showInputDialog("Insira o nome do médico.");
+        medico.setNome(nome);
         String especialidade = JOptionPane.showInputDialog("Insira a especialidade do médico.");
+        medico.setEspecialidade(especialidade);
+        agenda.addMedicos(medico);
         
         JOptionPane.showMessageDialog(quadro, " Médico adicionado com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -418,18 +430,19 @@ public class Frame implements ActionListener {
         String nome = JOptionPane.showInputDialog("Insira o nome do médico para removê-lo.");
         String especialidade = JOptionPane.showInputDialog("Insira a especialidade do médico para removê-lo");
         
-        JOptionPane.showMessageDialog(quadro, " Médico removido com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+        agenda.removerMedicoPorNome(nome);
+
     }
     
     private void lstMedico(){
-        String cpf = JOptionPane.showInputDialog("Insira o nome do médico.");
+        String nome = JOptionPane.showInputDialog("Insira o nome do médico.");
         
-        JOptionPane.showMessageDialog(quadro, " Dados do médico: " , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
-    }
+        agenda.listarMedicoPorNome(nome);
+
+        }
     
     private void lstAllMedicos(){
-        // Será melhor criar um JFrame. Ou é hora de usar um JPanel?
-        JOptionPane.showMessageDialog(quadro, " A implementar..." , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+        agenda.listarTodosMedicos();
     }
     
     

@@ -5,6 +5,8 @@
  */
 package pooproject;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author André Biriba
@@ -30,10 +32,7 @@ public class Medico extends Agente {
     }
     
     public void imprime(){
-        System.out.println("\n Dados do medico \n ");    
-        System.out.println("Nome do medico: " + getNome());
-        System.out.println("Especialidade: " + getEspecialidade() + "\n");
-        
+        JOptionPane.showMessageDialog(null, "[Dados do medico] \n\n" + "Nome do medico: " + getNome() + "\nEspecialidade: " + getEspecialidade() + "\n" , "Sistema de clínicas!", JOptionPane.INFORMATION_MESSAGE);   
     }
     
 

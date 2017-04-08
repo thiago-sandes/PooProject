@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *  #TODO
  *  Consertar método de busca em HashMap. Está errado.
@@ -22,6 +24,7 @@ public class Agenda implements Interface{
     private ArrayList<Medico> medicos;
     private HashMap<String,Paciente> pacientes; // Instanciar no construtor!
     private HashMap<String,Consulta> consultas;
+    private JFrame quadro;
     
     public Agenda(){
         paciente = new Paciente();
@@ -55,7 +58,6 @@ public class Agenda implements Interface{
         
         for (i = 0; i < medicos.size(); i++){
             if(nome.equals(medicos.get(i).getNome())){
-                System.out.println("\nMedico encontrado!\n");
                 medicos.get(i).imprime();
                 flagAux = true;
                 return true;
@@ -64,7 +66,7 @@ public class Agenda implements Interface{
         }
         
         if(flagAux!=true){
-            System.out.println("\n Medico nao encontrado. \n ");  
+            JOptionPane.showMessageDialog(quadro,"\nMédico não encontrado.\n","Sistema de Clínicas!", JOptionPane.INFORMATION_MESSAGE);
         }
         return false;
     }
@@ -77,34 +79,35 @@ public class Agenda implements Interface{
         for (i = 0; i < medicos.size(); i++){
             if(nome.equals(medicos.get(i).getNome())){
                 medicos.remove(i);
-                System.out.println("\n Medico removido com sucesso! \n ");  
+                JOptionPane.showMessageDialog(quadro,"\nMédico removido com sucesso.\n","Sistema de Clínicas!", JOptionPane.INFORMATION_MESSAGE);
                 flagAux = true;
             }
 
         }
         
         if(flagAux!=true){
-            System.out.println("\n Medico nao encontrado. \n ");  
+            JOptionPane.showMessageDialog(quadro,"\nMédico não encontrado.\n","Sistema de Clínicas!", JOptionPane.INFORMATION_MESSAGE); 
         }
     }
     
    
-    public void addPaciente(String nome, Paciente paciente){
-            pacientes.put(nome, paciente);      
+    public void addPaciente(String cpf, Paciente paciente){
+            pacientes.put(cpf, paciente);      
     }
     
-    public void removerPacientePorNome(String nome){ // Falta revisar código. 
+    public void removerPacientePorCpf(String cpf){ // Falta revisar código. 
         boolean flagAux = false;
         
         try{
-            if(nome.equals(pacientes.get(nome).getNome())){
-                pacientes.remove(nome);
-                System.out.println("\nPaciente removido com sucesso!\n");
+            if(cpf.equals(pacientes.get(cpf).getCpf())){
+                pacientes.remove(cpf);
+                JOptionPane.showMessageDialog(quadro,"\nPaciente removido com sucesso.\n","Sistema de Clínicas!", JOptionPane.INFORMATION_MESSAGE);
+ 
                 flagAux = true;
             }
-        }catch(NullPointerException e){
+        }catch(Exception e){
             if(flagAux != true){
-                System.out.println("\nPaciente nao esta cadastrado ou seu nome esta errado.\n");
+                JOptionPane.showMessageDialog(quadro,"\nPaciente não está cadastrado ou seu cpf está errado.\n","Sistema de Clínicas!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         
@@ -112,28 +115,28 @@ public class Agenda implements Interface{
                             
     }
     
-    public boolean listarPacientePorNome(String nome){
+    public boolean listarPacientePorCpf(String cpf){
         boolean flagAux = false;
        
         try{
-            if(nome.equals(pacientes.get(nome).getNome())){
-                System.out.println("\nPaciente encontrado!\n");
-                pacientes.get(nome).imprime();
+            if(cpf.equals(pacientes.get(cpf).getCpf())){  
+                pacientes.get(cpf).imprime();
                 flagAux = true;
                 return flagAux;
             }
             
-            if(!nome.equals(pacientes.get(nome).getNome()))
-                System.out.println("\nPaciente nao encontrado.\n");
+            if(!cpf.equals(pacientes.get(cpf).getCpf()))                              
+                JOptionPane.showMessageDialog(quadro,"\nPaciente nao encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+ 
         }catch(NullPointerException e){
             if(flagAux!=true){
-                System.out.println("\nPaciente nao encontrado.\n");
-            }
+                JOptionPane.showMessageDialog(quadro,"\nPaciente nao encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+           }
         }
         
-        if(nome.equals("") && flagAux!= true){
-            System.out.println("\nPaciente nao encontrado.\n");
-        }
+        if(cpf.equals("") && flagAux!= true){
+            JOptionPane.showMessageDialog(quadro,"\nPaciente nao encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+     }
         return false;
     }
     

@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package pooproject;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author André Biriba
@@ -40,11 +43,7 @@ public class Paciente extends Agente {
     
     
      public void imprime(){
-        System.out.println("\n Dados do paciente \n ");    
-        System.out.println("Nome do paciente: " + getNome());
-        System.out.println("Cpf: " + cpf);
-        System.out.println("Telefone: " + telefone + "\n");
-        
+        JOptionPane.showMessageDialog(null, "\n[Dados do paciente] \n\n" + "Nome do paciente: " + getNome()+ "\nCpf: " + cpf + "\nTelefone: " + telefone + "\n" ,"Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);        
     }
     
 }
