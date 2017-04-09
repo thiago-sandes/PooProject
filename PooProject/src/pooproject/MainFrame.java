@@ -428,7 +428,6 @@ public class MainFrame implements ActionListener {
     
     private void rmvMedico(){
         String nome = JOptionPane.showInputDialog("Insira o nome do médico para removê-lo.");
-        String especialidade = JOptionPane.showInputDialog("Insira a especialidade do médico para removê-lo");
         
         agenda.removerMedicoPorNome(nome);
 
@@ -451,29 +450,71 @@ public class MainFrame implements ActionListener {
     }
     
     private void addConsulta(){
-        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
+        String auxHorario;
+        boolean auxFlag;
+        int horario;
+
+        Consulta consulta = new Consulta();
+        String cpfPaciente = JOptionPane.showInputDialog("Insira o cpf do paciente cadastrado: ");
+    
+        auxFlag = agenda.listarPacientePorCpf(cpfPaciente);
+        if (auxFlag == true) {    
+            consulta.setCpfPaciente(cpfPaciente);
+            consulta.setNomePaciente(agenda.getNomeHashPacientes(cpfPaciente));
+            
+            String nomeMedico = JOptionPane.showInputDialog("Deseja marcar a consulta para qual médico(insira seu nome)?: ");
+                        
+            auxFlag = agenda.listarMedicoPorNome(nomeMedico);
+            if(auxFlag == true){
+                consulta.setNomeMedico(nomeMedico);
+                auxHorario = JOptionPane.showInputDialog("Os horários de atendimentos são das 08h - 12h (1h cada consulta) e das 14h - 18h. Em qual horario deseja marcar a consulta?: ");
+                horario = Integer.parseInt(auxHorario);
+                
+                try {
+                    while ((horario > 11 && horario < 14) || (horario > 17 || horario < 8)) {
+                        auxHorario = JOptionPane.showInputDialog("Horário inválido. Tente novamente com um horário disponível: ");
+                        horario = Integer.parseInt(auxHorario);
         
-        String nome = JOptionPane.showInputDialog("Insira o nome do médico.");
-        String especialidade = JOptionPane.showInputDialog("Insira a especialidade do médico.");
-        
-        JOptionPane.showMessageDialog(quadro, " Consulta marcada com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+                        auxFlag = true;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(quadro, "Caractere inválido. Tente novamente acessando o menu Consulta.", "Alerta!",  JOptionPane.INFORMATION_MESSAGE);
+
+                    auxFlag = false;
+                }
+                
+                if (auxFlag == true) {
+                    consulta.setHorario(horario);
+
+                    JOptionPane.showMessageDialog(quadro, "Consulta marcada com sucesso!", "Alerta!",  JOptionPane.INFORMATION_MESSAGE);
+
+                    agenda.addConsulta(cpfPaciente, consulta);
+                    
+                } else {
+                    JOptionPane.showMessageDialog(quadro, "Consulta não registrada!", "Alerta!",  JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            }else{
+               JOptionPane.showMessageDialog(quadro, "Busque o nome correto do medico no menu Medico e volte aqui.", "Alerta!",  JOptionPane.INFORMATION_MESSAGE);                
+            }                            
+        } else {
+            JOptionPane.showMessageDialog(quadro, "Busque o cpf correto do paciente no menu Paciente e volte aqui.", "Alerta!",  JOptionPane.INFORMATION_MESSAGE);                
+        }
     }
     
     private void rmvConsulta(){
         String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
-        
-        JOptionPane.showMessageDialog(quadro, " Consulta desmarcada com sucesso!" , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+        agenda.removerConsultaPorPaciente(cpf);
     }
     
     private void lstConsulta(){
-        String cpf = JOptionPane.showInputDialog("Insira o nome do paciente.");
+        String cpf = JOptionPane.showInputDialog("Insira o cpf do paciente.");
+        agenda.listarConsultaPorPaciente(cpf);
         
-        JOptionPane.showMessageDialog(quadro, " Dados da consulta: " , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void lstAllConsultas(){
-        // Será melhor criar um JFrame. Ou é hora de usar um JPanel?
-        JOptionPane.showMessageDialog(quadro, " A implementar..." , "Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);
+        agenda.listarTodasConsultas();
     }
     
     private void sair(){

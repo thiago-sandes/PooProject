@@ -45,7 +45,10 @@ public class Agenda implements Interface{
     
     public void listarTodosMedicos(){
         Iterator<Medico> medicoIterator = medicos.iterator();;
-       
+        
+        if(medicos.isEmpty())
+            JOptionPane.showMessageDialog(quadro,"\nNão há médicos cadastrados.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+        
         while(medicoIterator.hasNext()){
             medicoIterator.next().imprime();
         }
@@ -125,78 +128,88 @@ public class Agenda implements Interface{
                 return flagAux;
             }
             
-            if(!cpf.equals(pacientes.get(cpf).getCpf()))                              
+            if(!cpf.equals(pacientes.get(cpf).getCpf())){                              
                 JOptionPane.showMessageDialog(quadro,"\nPaciente nao encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
- 
+                return flagAux;
+            }
         }catch(NullPointerException e){
             if(flagAux!=true){
                 JOptionPane.showMessageDialog(quadro,"\nPaciente nao encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
            }
         }
         
-        if(cpf.equals("") && flagAux!= true){
-            JOptionPane.showMessageDialog(quadro,"\nPaciente nao encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
-     }
         return false;
     }
     
     public void listarTodosPacientes(){
+        if(pacientes.isEmpty())
+            JOptionPane.showMessageDialog(quadro,"\nNão há pacientes cadastrados.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+        
         for (Map.Entry<String,Paciente> entrada : pacientes.entrySet()) {
                 entrada.getValue().imprime();
         }
     }
     
-    
-    public void addConsulta(String nome, Consulta consulta){
-            consultas.put(nome, consulta);      
+    public String getNomeHashPacientes(String cpf){
+        return pacientes.get(cpf).getNome();
     }
     
-    public void removerConsultaPorPaciente(String nome){ // Falta revisar código. 
+    
+    public void addConsulta(String cpf, Consulta consulta){
+            consultas.put(cpf, consulta);      
+    }
+    
+    public void removerConsultaPorPaciente(String cpf){ // Falta revisar código. 
         boolean flagAux = false;
         
         try{
-            if(nome.equals(consultas.get(nome).getNomePaciente())){
-                consultas.remove(nome);
-                System.out.println("\nConsulta removida com sucesso!\n");
+            if(cpf.equals(consultas.get(cpf).getCpfPaciente())){
+                consultas.remove(cpf);
+                JOptionPane.showMessageDialog(quadro,"\nConsulta removida com sucesso!\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
                 flagAux = true;
             }
         }catch(NullPointerException e){
             if(flagAux != true){
-                System.out.println("\nConsulta nao esta cadastrada ou o nome do paciente esta errado.\n");
+                JOptionPane.showMessageDialog(quadro,"\nConsulta nao esta cadastrada ou o nome do paciente esta errado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         
-        
-                            
     }
     
-    public boolean listarConsultaPorPaciente(String nome){
+    public boolean listarConsultaPorPaciente(String cpf){
         boolean flagAux = false;
        
         try{
             for (Map.Entry<String,Consulta> entrada : consultas.entrySet()) {
-                if(nome.equals(consultas.get(nome).getNomePaciente())){
-                    System.out.println("\nConsulta encontrada!\n");
+                if(cpf.equals(consultas.get(cpf).getCpfPaciente())){
+                    JOptionPane.showMessageDialog(quadro,"\nConsulta encontrada!\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
                     entrada.getValue().imprime();
                     flagAux = true;
-                    return true;
+                    return flagAux;
                 }
             }
-            if(!nome.equals(consultas.get(nome).getNomePaciente()))
-                System.out.println("\nConsulta nao encontrada.\n");
+            if(!cpf.equals(consultas.get(cpf).getCpfPaciente())){
+                JOptionPane.showMessageDialog(quadro,"\nConsulta não encontrada.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+                return flagAux;
+            }        
         }catch(NullPointerException e){
             if(flagAux!=true){
-                System.out.println("\nConsulta nao encontrada.\n");
+                JOptionPane.showMessageDialog(quadro,"\nConsulta não encontrada.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+                return flagAux;
             }
         }
         
-        if(nome.equals("") && flagAux!= true){
-            System.out.println("\nConsulta nao encontrada.\n");
+        if(cpf.equals("") && flagAux!= true){
+            JOptionPane.showMessageDialog(quadro,"\nConsulta não encontrada.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+                
         }
         return false;
     }
     
     public void listarTodasConsultas(){
+        if(consultas.isEmpty())
+            JOptionPane.showMessageDialog(quadro,"\nNão há consultas marcadas.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+        
         for (Map.Entry<String,Consulta> entrada : consultas.entrySet()) {
                 entrada.getValue().imprime();
         }

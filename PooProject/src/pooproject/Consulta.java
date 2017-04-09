@@ -5,6 +5,8 @@
  */
 package pooproject;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Thiago
@@ -12,15 +14,17 @@ package pooproject;
 public class Consulta {
     private String nomeMedico;
     private String nomePaciente;
+    private String cpfPaciente;
     private int horario;
     
     public Consulta(){
         
     }
     
-    public Consulta(String nomeMedico, String nomePaciente, int horario){
+    public Consulta(String nomeMedico, String cpfPaciente, String nomePaciente, int horario){
         this.nomeMedico = nomeMedico;
         this.nomePaciente = nomePaciente;
+        this.cpfPaciente = cpfPaciente;
         this.horario = horario;
     }
     
@@ -40,6 +44,15 @@ public class Consulta {
         nomePaciente = nome;
     }
     
+    
+    public String getCpfPaciente(){
+        return this.cpfPaciente;
+    }
+    
+    public void setCpfPaciente(String cpf){
+        cpfPaciente = cpf;
+    }
+    
     public int getHorario(){
         return horario;
     }
@@ -49,10 +62,6 @@ public class Consulta {
     }
     
     public void imprime(){
-        System.out.println("\n Dados da consulta \n ");    
-        System.out.println("Nome do paciente: " + getNomePaciente());
-        System.out.println("Nome do medico: " + getNomeMedico());
-        System.out.println("Horario da consulta: " + getHorario() + "h\n");
-        
+        JOptionPane.showMessageDialog(null,"\n Dados da consulta \n\n" + "Nome do paciente: " + getNomePaciente() + "\n" + "Cpf do paciente: " + getCpfPaciente() + "\n" + "Nome do medico: " + getNomeMedico() + "\n" + "Horario da consulta: " + getHorario() + "h\n" ,"Alerta!", JOptionPane.INFORMATION_MESSAGE);
     }
 }
