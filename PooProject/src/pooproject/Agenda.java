@@ -55,6 +55,20 @@ public class Agenda implements Interface{
         
     }
     
+    public String salvarTodosMedicos(){
+        Iterator<Medico> medicoIterator = medicos.iterator();;
+        String medicos = "";
+        
+        while(medicoIterator.hasNext()){
+            medicos +=  medicoIterator.next().toString();
+        }
+        
+        
+        if(medicos == null)
+            return "\r\n\r\n";
+        return medicos;
+    }
+    
     public boolean listarMedicoPorNome(String nome){
         int i;
         boolean flagAux = false;
@@ -94,7 +108,7 @@ public class Agenda implements Interface{
     }
     
    
-    public void addPaciente(String cpf, Paciente paciente){
+    public void addPacientes(String cpf, Paciente paciente){
             pacientes.put(cpf, paciente);      
     }
     
@@ -129,12 +143,12 @@ public class Agenda implements Interface{
             }
             
             if(!cpf.equals(pacientes.get(cpf).getCpf())){                              
-                JOptionPane.showMessageDialog(quadro,"\nPaciente nao encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(quadro,"\nPaciente não encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
                 return flagAux;
             }
         }catch(NullPointerException e){
             if(flagAux!=true){
-                JOptionPane.showMessageDialog(quadro,"\nPaciente nao encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(quadro,"\nPaciente não encontrado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
            }
         }
         
@@ -148,6 +162,18 @@ public class Agenda implements Interface{
         for (Map.Entry<String,Paciente> entrada : pacientes.entrySet()) {
                 entrada.getValue().imprime();
         }
+    }
+    
+    public String salvarTodosPacientes(){
+        String stringPacientes = "";
+        
+        for (Map.Entry<String,Paciente> entrada : pacientes.entrySet()) {
+                stringPacientes += entrada.getValue().toString();
+        }
+
+        if(stringPacientes == null)
+            return "\r\n\r\n";
+        return stringPacientes;
     }
     
     public String getNomeHashPacientes(String cpf){
@@ -170,7 +196,7 @@ public class Agenda implements Interface{
             }
         }catch(NullPointerException e){
             if(flagAux != true){
-                JOptionPane.showMessageDialog(quadro,"\nConsulta nao esta cadastrada ou o nome do paciente esta errado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(quadro,"\nConsulta não está cadastrada ou o nome do paciente está errado.\n","Alerta!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         
@@ -215,55 +241,17 @@ public class Agenda implements Interface{
         }
     }
     
-    
-    public void menuPrincipal(){
-        System.out.println("\n Bem vindo ao Hospital Vida Nova!\n");
-        System.out.println("Abaixo segue as opcoes de servicos disponiveis:");
-        System.out.println("1 - Paciente");
-        System.out.println("2 - Medico");
-        System.out.println("3 - Consulta");
-        System.out.println("4 - Sair\n"); 
+    public String salvarTodasConsultas(){
+        String stringConsultas = "";
+        for (Map.Entry<String,Consulta> entrada : consultas.entrySet()) {
+                stringConsultas += entrada.getValue().toString();
+        }
         
         
+        if(stringConsultas == null)
+            return "\r\n\r\n";
+        return stringConsultas;
     }
-    
-    public void menuPaciente(){  
-            System.out.println("\nEste e o menu do Paciente.\n");
-            System.out.println("O que deseja fazer?");
-            System.out.println("1 - Cadastro de paciente");
-            System.out.println("2 - Remocao de paciente");
-            System.out.println("3 - Listar paciente cadastrado");
-            System.out.println("4 - Listar todos os pacientes cadastrados");
-            System.out.println("5 - Voltar ao menu anterior\n");
-
-    }
-    
-    public void menuMedico(){
-            System.out.println("\nEste e o menu do Medico.\n");
-            System.out.println("O que deseja fazer?");
-            System.out.println("1 - Cadastro de medico");
-            System.out.println("2 - Remocao de medico");
-            System.out.println("3 - Listar medico cadastrado");
-            System.out.println("4 - Listar todos os medicos cadastrados");
-            System.out.println("5 - Voltar ao menu anterior\n");
-            
-            
-
-    }
-    
-    public void menuConsulta(){
-            System.out.println("\nEste e o menu de consulta.\n");
-            System.out.println("O que deseja fazer?");
-            System.out.println("1 - Marcar consulta");
-            System.out.println("2 - Desmarcar consulta");
-            System.out.println("3 - Listar consulta marcada para um dado paciente");
-            System.out.println("4 - Listar todas as consultas marcadas por paciente");
-            System.out.println("5 - Voltar ao menu anterior\n");
-            
-            
-
-    }
-    
     
     public void delay(int parametro){ 
         try {       
@@ -272,65 +260,7 @@ public class Agenda implements Interface{
             e.printStackTrace();
         }
     }
-     
-    public void voltarMenuPrincipal(){
-        String aux;
-        int option;
-        Scanner ler = new Scanner(System.in);
-        
-        System.out.println("\nDeseja voltar ao menu principal?");
-        System.out.println("(1 - Sim | 2 - Nao(Programa sera¡ fechado)\n");
-        
-        
-        option = lerOpcao();
-        
-        if(option == 1){
-            menuPrincipal();
-        }else{
-            if(option == 2){
-                System.out.println("Como quiser. Bye!");
-                delay(1);
-                System.exit(0);
-            }else{
-                System.out.println("Opcao invalida! Tente novamente. \n");
-                voltarMenuPrincipal();
-            }
-        }
-        
-    }
-    
-    public int lerOpcao(){
-        Scanner ler = new Scanner(System.in);
-        String aux = "";
-        int intAux = 0;
-        boolean flag = false;
-        
-        do{
-            try{
-                aux = ler.nextLine();
-                if(aux.equals("")){
-                    System.out.println("Opcao inexistente. Tente novamente:");
-                }else{
-                    intAux = Integer.parseInt(aux);
-                    if((intAux < 1) || (intAux > 5) ){
-                        System.out.println("Opcao inexistente. Tente novamente:");
-                        flag = true;
-                    }else{
-                        flag = false;
-                    }
-                    
-                }
-                
-            }catch(NumberFormatException e){
-                System.out.println("\nOpcao não existente. Tente novamente em 3 segundos. \n");
-                flag = true;
-                delay(3);
-            }
-        }while(aux.equals("") || flag == true);
-        return intAux;
-    }
-    
-    
+
 }
     
 

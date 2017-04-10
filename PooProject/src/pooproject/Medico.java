@@ -35,8 +35,10 @@ public class Medico extends Agente {
         JOptionPane.showMessageDialog(null, "[Dados do medico] \n\n" + "Nome do medico: " + getNome() + "\nEspecialidade: " + getEspecialidade() + "\n" , "Sistema de clínicas!", JOptionPane.INFORMATION_MESSAGE);   
     }
     
-
+    public String toString(){
+        //[Linux]  return getNome() + "\n" + getEspecialidade() + "\n\n";   
+        return getNome() + "\r\n" + getEspecialidade() + "\r\n\r\n";   
     
-    
+    }
      
 }

@@ -62,6 +62,13 @@ public class Consulta {
     }
     
     public void imprime(){
-        JOptionPane.showMessageDialog(null,"\n Dados da consulta \n\n" + "Nome do paciente: " + getNomePaciente() + "\n" + "Cpf do paciente: " + getCpfPaciente() + "\n" + "Nome do medico: " + getNomeMedico() + "\n" + "Horario da consulta: " + getHorario() + "h\n" ,"Alerta!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,"\n Dados da consulta \n\n" + "Nome do paciente: " + getNomePaciente() + "\n" + "Cpf do paciente: " + getCpfPaciente() + "\n" + "Nome do medico: " + getNomeMedico() + "\n" + "Horario da consulta: " + getHorario() + "h\n\n" ,"Alerta!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public String toString(){
+        //[Linux]    return  getNomePaciente() + "\n" + getCpfPaciente() + "\n"  + getNomeMedico() + "\n" +  getHorario()+ "h" + "\n\n";
+        return  getNomePaciente() + "\r\n" + getCpfPaciente() + "\r\n"  + getNomeMedico() + "\r\n" +  getHorario() + "\r\n\r\n";
+        
+        
     }
 }

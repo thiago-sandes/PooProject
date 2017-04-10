@@ -42,8 +42,13 @@ public class Paciente extends Agente {
     }
     
     
-     public void imprime(){
+    public void imprime(){
         JOptionPane.showMessageDialog(null, "\n[Dados do paciente] \n\n" + "Nome do paciente: " + getNome()+ "\nCpf: " + cpf + "\nTelefone: " + telefone + "\n" ,"Sistema de clínica!", JOptionPane.INFORMATION_MESSAGE);        
     }
     
+    public String toString(){
+        //[Linux] return  getNome()+ "\n" + getCpf() + "\n" + getTelefone() + "\n\n";        
+    
+        return  getNome()+ "\r\n" + getCpf() + "\r\n" + getTelefone() + "\r\n\r\n";        
+    }
 }
